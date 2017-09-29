@@ -1,0 +1,44 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{panelHeading}}
+    </div>
+    <div class='panel-body' *ngIf='dishes && dishes.length' >
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <th> </th>
+                    <th>Portata</th>
+                    <th>Nome</th>
+                    <th>Dieta</th>
+                    <th>Prezzo</th>
+                    <th> </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let dish of dishes'>
+                        <td><img [src]='dish.imageUrl' 
+                            alt='course image'
+                            [style.width.px] ='imagewidth'
+                            /></td>
+                        <td>{{dish.course|uppercase}}</td>
+                        <td><a [routerLink]='["/menu",dish.id]'>{{dish.name}}</a></td>
+                        <td>
+                                <app-diet [dietName] ='dish.diet' 
+                                (notifyDiet)='onNotifyDiet($event)'></app-diet>
+                           {{dietMessage}}
+                        </td>
+                        <td>{{dish.price | currency:'EUR':true:"1.2-3"}}</td>
+                        
+                        <td>
+                            <button class="btn btn-primary" (click) ='decCounter(dish)' >-</button>
+                            <input type [(ngModel)]='dish.counter'/>
+                            <button class="btn btn-primary" (click) ='incCounter(dish)'>+</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p> Totale speso : {{totPrice | currency:'EUR':true:"1.2-3"}}</p>
+            <button class="btn btn-default" (click) ='reset()' >Reset</button>
+            <button class="btn btn-primary" (click) ='doOrder()'>Ordina</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class='panel panel-primary'>
+    <div class ='panel-heading'>
+      Dettaglio Piatto
+    </div>
+  <div class ='panel-body' *ngIf='dish'>
+    <img [src] = 'dish.imageUrl' [style.width.px] ='imageWidth'/>
+    <p>{{dish.course}}</p>
+    <p>{{dish.name}}</p>
+    <app-diet [dietName] ='dish.diet'></app-diet>
+    <p>{{dish.price}}</p>
+  </div>
+  <div class="panel-footer">
+    <a class ="btn btn-default" (click) ='onback()'>Back</a>
+  </div>
+</div>
